@@ -15,20 +15,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: system-ui, -apple-system, sans-serif;
-    cursor: none; /* Disables default cursor for custom cursor effect */
 }
 
-/* Custom Cursor Styling */
-.cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--primary); /* Primary color border */
-    border-radius: 50%; /* Circular shape */
-    position: fixed;
-    pointer-events: none; /* Allows cursor to pass through elements */
-    z-index: 9999; /* Keeps cursor on top of other elements */
-    transition: transform 0.2s ease; /* Smooth resizing */
-}
+
 
 /* Body Styling */
 body {
