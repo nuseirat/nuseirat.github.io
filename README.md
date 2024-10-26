@@ -141,7 +141,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - GitHub: [@nuseirat](https://github.com/nuseirat)
 - LinkedIn: [@mohammednuseirat](https://linkedin.com/in/mohammednuseirat)
 - X: [@MohaNuseirat](https://X.com/mohanuseirat)
-- Website: [nuseirat.hashnode.dev](https://nuseirat.hashnode.dev/)
+- Blog: [nuseirat.hashnode.dev](https://nuseirat.hashnode.dev)
 
 ## 🤝 Contributing
 
