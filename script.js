@@ -1,6 +1,7 @@
 //Created by Mohammed Nuseirat
 
 
+
 // Initialize AOS (Animate On Scroll)
 AOS.init({
     duration: 1000,
