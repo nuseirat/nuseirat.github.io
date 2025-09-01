@@ -19,16 +19,6 @@ body {
     line-height: 1.6;
 }
 
-.cursor {
-    width: 20px;
-    height: 20px;
-    background: var(--primary);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.2s ease;
-}
 
 .container {
     max-width: 1200px;
@@ -428,4 +418,5 @@ body {
     .award-icon {
         align-self: center;
     }
+
 }
