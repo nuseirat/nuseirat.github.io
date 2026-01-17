@@ -1,181 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammed Al-Nuseirat</title>
-    
-    <!-- Vue.js CDN (Vue 3) -->
-    <!-- تستخدم لإنشاء تطبيق الواجهة باستخدام createApp -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.min.js"></script>
-    
-    <!-- AOS Animation Library للحركات أثناء السكول -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    
-    <!-- Font Awesome Icons للأيقونات العامة (سوشال، أسهم، الخ) -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Custom Styles ملف التنسيقات الرئيسي -->
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammed Al-Nuseirat</title>
+
+  <!-- Vue.js CDN (Vue 3) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.min.js"></script>
+
+  <!-- AOS Animation Library -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
-    <div id="app">
-        <!-- Custom cursor مؤشر الماوس المخصص -->
-        <div class="cursor" ref="cursor"></div>
+  <div id="app">
+    <!-- Custom cursor -->
+    <div class="cursor" ref="cursor"></div>
 
-        <div class="container">
-            <!-- Profile Section -->
-            <div class="profile-card" data-aos="fade-up">
-                <div class="profile-content">
-                    <div class="profile-image">
-                        <!-- صورة البروفايل -->
-                        <img src="images/pic.jpeg" alt="Mohammed Al-Nuseirat">
-                    </div>
-                    
-                    <div class="profile-info">
-                        <h1>Mohammed Al-Nuseirat</h1>
-                        <p>Software Engineer skilled in Spring Boot and creating modern web platforms.</p>
-                        
-                        <div class="social-links">
-                            <!-- روابط السوشال ميديا + زر تحميل السيرة الذاتية -->
-                            <a href="https://github.com/nuseirat" title="GitHub" class="social-icon" target="_blank">
-                                <i class="fab fa-github"></i>
-                            </a>
-                            <a href="https://linkedin.com/in/mohammednuseirat" title="LinkedIn" class="social-icon" target="_blank">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="https://x.com/mohanuseirat" title="X" class="social-icon" target="_blank">
-                                <i class="fa-brands fa-x-twitter"></i>
-                            </a>
-                            <a href="mailto:mnuseirat@outlook.sa" title="Email" class="social-icon">
-                                <i class="fa fa-envelope"></i>
-                            </a>
-                            <button @click="downloadCV" class="cv-button">
-                                <!-- الأيقونة تتغير ديناميكياً حسب حالة التحميل -->
-                                <i :class="downloadIcon"></i> Download CV
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    <div class="container">
+      <!-- Profile Section -->
+      <div class="profile-card" data-aos="fade-up">
+        <div class="profile-content">
+          <div class="profile-image">
+            <img src="images/pic.jpeg" alt="Mohammed Al-Nuseirat" />
+          </div>
+
+          <div class="profile-info">
+            <h1>Mohammed Al-Nuseirat</h1>
+            <p>Software Engineer skilled in Spring Boot and creating modern web platforms.</p>
+
+            <div class="social-links">
+              <a href="https://github.com/nuseirat" title="GitHub" class="social-icon" target="_blank">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://linkedin.com/in/mohammednuseirat" title="LinkedIn" class="social-icon" target="_blank">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a href="https://x.com/mohanuseirat" title="X" class="social-icon" target="_blank">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+              <a href="mailto:mnuseirat@outlook.sa" title="Email" class="social-icon">
+                <i class="fa fa-envelope"></i>
+              </a>
+
+              <button @click="downloadCV" class="cv-button">
+                <i :class="downloadIcon"></i>
+                Download CV
+              </button>
             </div>
-
-            <!-- Skills Section -->
-            <div class="skills-grid">
-                <div class="skill-card primary" data-aos="fade-right">
-                    <i class="fas fa-graduation-cap skill-icon"></i>
-                    <h3>Education</h3>
-                    <p>Computer Science Student at Arab Open University 2022-2026</p>
-                </div>
-
-                <div class="skill-card accent" data-aos="fade-left">
-                    <i class="fas fa-location-dot skill-icon"></i>
-                    <h3>Location</h3>
-                    <p>Saudi Arabia, Eastern Province</p>
-                </div>
-            </div>
-
-            <!-- Projects Section -->
-            <div class="projects">
-                <h2 data-aos="fade-up" style="margin-top: 7rem;">Recent Projects</h2>
-
-                <div class="projects-grid">
-                    <!-- بطاقات المشاريع، تستخدم visibleProjects حتى نتحكم في Show More / Show Less -->
-                    <div class="project-card" data-aos="fade-up" v-for="project in visibleProjects" :key="project.id">
-                        <div class="project-image" @click="expandImage">
-                            <img :src="project.image" :alt="project.title">
-                        </div>
-                        <div class="project-info">
-                            <h3 class="project-title">{{ project.title }}</h3>
-                            <p class="project-desc">{{ project.description }}</p>
-                            <div class="project-meta">
-                                <div class="project-tech">
-                                    <!-- أيقونات التقنيات المستخدمة في المشروع -->
-                                    <img v-for="tech in project.technologies" 
-                                         :key="tech.name"
-                                         :src="tech.icon" 
-                                         :alt="tech.name" 
-                                         :title="tech.name" 
-                                         class="tool-icon" 
-                                         style="height: 24px;">
-                                </div>
-                                <!-- رابط المشروع إن وجد -->
-                                <a :href="project.link" class="project-link-icon" title="View Project" target="_blank" v-if="project.link !== '#'">
-                                    <i class="fas fa-arrow-up-right-from-square"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project Controls Show More / Show Less -->
-                <div class="project-controls">
-                    <button v-if="!showAllProjects" @click="showMoreProjects" class="control-btn">
-                        Show More
-                    </button>
-                    <button v-if="showAllProjects" @click="showLessProjects" class="control-btn">
-                        Show Less
-                    </button>
-                </div>
-            </div>
-
-            <!-- Awards Section -->
-            <div class="honors-awards">
-                <div class="tools-header">
-                    <h2 data-aos="fade-up">Awards & Recognition</h2>
-                </div>
-                
-                <div class="awards-list">
-                    <!-- الجوائز والتكريم -->
-                    <div class="award-item" data-aos="fade-up" v-for="award in awards" :key="award.id">
-                        <div class="award-icon">
-                            <i :class="award.icon"></i>
-                        </div>
-                        <div class="award-details">
-                            <h3>{{ award.title }}</h3>
-                            <p class="award-institution">{{ award.institution }}</p>
-                            <p class="award-description">{{ award.description }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tools Section -->
-            <div class="premium-tools">
-                <div class="tools-header">
-                    <h2 data-aos="fade-up">Set of Tools</h2>
-                </div>
-                
-                <div class="tools-grid">
-                    <!-- أيقونات وأسماء الأدوات والتقنيات -->
-                    <div class="tool-card" data-aos="fade-up" v-for="tool in tools" :key="tool.name">
-                        <img :src="tool.icon" :alt="tool.name" class="tool-icon" />
-                        <h4>{{ tool.name }}</h4>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <footer class="footer">
-                <div class="footer-content">
-                    <p>Mohammed Al-Nuseirat</p>
-                    <p class="footer-year">© {{ currentYear }}</p>
-                </div>
-            </footer>
-
-            <!-- Modal لعرض صورة المشروع بالحجم الكامل -->
-            <div id="imageModal" class="modal" v-show="modalVisible" @click="closeModal">
-                <span class="close-modal" @click="closeModal">×</span>
-                <img :src="modalImageSrc" class="modal-content">
-            </div>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <!-- Font Awesome Kit (اختياري إذا كنت تحتاج مزيد من الأيقونات من الكيت) -->
-    <script src="https://kit.fontawesome.com/86e812f22e.js" crossorigin="anonymous"></script>
-    
-    <!-- Custom Script ملف Vue والمنطق الخاص بالموقع -->
-    <script src="script.js"></script>
+      <!-- Skills Section -->
+      <div class="skills-grid">
+        <div class="skill-card primary" data-aos="fade-right">
+          <i class="fas fa-graduation-cap skill-icon"></i>
+          <h3>Education</h3>
+          <p>Computer Science Student at Arab Open University 2022-2026</p>
+        </div>
+
+        <div class="skill-card accent" data-aos="fade-left">
+          <i class="fas fa-location-dot skill-icon"></i>
+          <h3>Location</h3>
+          <p>Saudi Arabia, Eastern Province</p>
+        </div>
+      </div>
+
+      <!-- Projects Section -->
+      <div class="projects">
+        <h2 data-aos="fade-up" style="margin-top: 7rem">Recent Projects</h2>
+
+        <div class="projects-grid">
+          <div class="project-card" data-aos="fade-up" v-for="project in visibleProjects" :key="project.id">
+            <div class="project-image" @click="expandImage">
+              <img :src="project.image" :alt="project.title" />
+            </div>
+
+            <div class="project-info">
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="project-desc">{{ project.description }}</p>
+
+              <div class="project-meta">
+                <div class="project-tech">
+                  <img v-for="tech in project.technologies" :key="tech.name" :src="tech.icon" :alt="tech.name"
+                    :title="tech.name" class="tool-icon" style="height: 24px" />
+                </div>
+
+                <a v-if="project.link" :href="project.link" class="project-link-icon" title="View Project"
+                  target="_blank">
+                  <i class="fas fa-arrow-up-right-from-square"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-controls">
+          <button v-if="!showAllProjects" @click="showMoreProjects" class="control-btn">
+            Show More
+          </button>
+
+          <button v-if="showAllProjects" @click="showLessProjects" class="control-btn">
+            Show Less
+          </button>
+        </div>
+      </div>
+
+      <!-- Certifications Section -->
+      <div class="certifications">
+        <div class="tools-header">
+          <h2 data-aos="fade-up">Certifications</h2>
+        </div>
+
+        <div class="certifications-grid">
+          <div class="cert-card" data-aos="fade-up" v-for="cert in certifications" :key="cert.id">
+            <div class="cert-left">
+              <img :src="cert.logo" :alt="cert.issuer" class="cert-logo">
+            </div>
+
+            <div class="cert-right">
+              <h3 class="cert-title">{{ cert.title }}</h3>
+
+              <p class="cert-issuer">{{ cert.issuer }}</p>
+
+              <p class="cert-issued">{{ cert.date }}</p>
+
+              <a v-if="cert.link && cert.link !== '#'" :href="cert.link" class="cert-link" target="_blank"
+                title="View Certificate">
+                View Certificate <i class="fas fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Awards Section -->
+      <div class="honors-awards">
+        <div class="tools-header">
+          <h2 data-aos="fade-up">Awards Recognition</h2>
+        </div>
+
+        <div class="awards-list">
+          <div class="award-item" data-aos="fade-up" v-for="award in awards" :key="award.id">
+            <div class="award-icon">
+              <i :class="award.icon"></i>
+            </div>
+
+            <div class="award-details">
+              <h3>{{ award.title }}</h3>
+              <p class="award-institution">{{ award.institution }}</p>
+              <p class="award-description">{{ award.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Section -->
+      <div class="premium-tools">
+        <div class="tools-header">
+          <h2 data-aos="fade-up">Set of Tools</h2>
+        </div>
+
+        <div class="tools-grid">
+          <div class="tool-card" data-aos="fade-up" v-for="tool in tools" :key="tool.name">
+            <img :src="tool.icon" :alt="tool.name" class="tool-icon" />
+            <h4>{{ tool.name }}</h4>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <p>Mohammed Al-Nuseirat</p>
+          <p class="footer-year">{{ currentYear }}</p>
+        </div>
+      </footer>
+
+      <!-- Modal -->
+      <div id="imageModal" class="modal" v-show="modalVisible" @click="closeModal">
+        <span class="close-modal" @click="closeModal">&times;</span>
+        <img :src="modalImageSrc" class="modal-content" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Font Awesome Kit -->
+  <script src="https://kit.fontawesome.com/86e812f22e.js" crossorigin="anonymous"></script>
+
+  <!-- Custom Script Vue -->
+  <script src="script.js"></script>
 </body>
 </html>
