@@ -106,7 +106,7 @@ createApp({
       certifications: [
         {
           id: 1,
-          title: "Support Specialization",
+          title: "IT Support Specialization",
           issuer: "Google",
           date: "Issued Jan 2026",
           link: "https://www.coursera.org/account/accomplishments/specialization/Y6CRY6MKPXSC",
@@ -322,3 +322,4 @@ logo: "https://brand.umich.edu/assets/brand/style-guide/logo-guidelines/U-M_Logo
     document.removeEventListener('mousemove', this.handleMouseMove);
   }
 }).mount('#app');
+
