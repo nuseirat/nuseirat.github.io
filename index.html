@@ -5,23 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohammed Al-Nuseirat</title>
     
-    <!-- Vue.js CDN -->
+    <!-- Vue.js CDN (Vue 3) -->
+    <!-- تستخدم لإنشاء تطبيق الواجهة باستخدام createApp -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.min.js"></script>
     
-    <!-- AOS Animation Library -->
+    <!-- AOS Animation Library للحركات أثناء السكول -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     
-    <!-- Font Awesome Icons -->
+    <!-- Font Awesome Icons للأيقونات العامة (سوشال، أسهم، الخ) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
-    <!-- Custom Styles -->
+    <!-- Custom Styles ملف التنسيقات الرئيسي -->
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div id="app">
-        <!-- Custom cursor -->
+        <!-- Custom cursor مؤشر الماوس المخصص -->
         <div class="cursor" ref="cursor"></div>
 
         <div class="container">
@@ -29,6 +30,7 @@
             <div class="profile-card" data-aos="fade-up">
                 <div class="profile-content">
                     <div class="profile-image">
+                        <!-- صورة البروفايل -->
                         <img src="images/pic.jpeg" alt="Mohammed Al-Nuseirat">
                     </div>
                     
@@ -37,19 +39,21 @@
                         <p>Software Engineer skilled in Spring Boot and creating modern web platforms.</p>
                         
                         <div class="social-links">
-                            <a href="https://github.com/nuseirat" title="GitHub" class="social-icon">
+                            <!-- روابط السوشال ميديا + زر تحميل السيرة الذاتية -->
+                            <a href="https://github.com/nuseirat" title="GitHub" class="social-icon" target="_blank">
                                 <i class="fab fa-github"></i>
                             </a>
-                            <a href="https://linkedin.com/in/mohammednuseirat" title="LinkedIn" class="social-icon">
+                            <a href="https://linkedin.com/in/mohammednuseirat" title="LinkedIn" class="social-icon" target="_blank">
                                 <i class="fab fa-linkedin"></i>
                             </a>
-                             <a href="https://x.com/mohanuseirat" title="X" class="social-icon">
-                            <i class="fa-brands fa-x-twitter"></i>
-                        </a>
+                            <a href="https://x.com/mohanuseirat" title="X" class="social-icon" target="_blank">
+                                <i class="fa-brands fa-x-twitter"></i>
+                            </a>
                             <a href="mailto:mnuseirat@outlook.sa" title="Email" class="social-icon">
                                 <i class="fa fa-envelope"></i>
                             </a>
                             <button @click="downloadCV" class="cv-button">
+                                <!-- الأيقونة تتغير ديناميكياً حسب حالة التحميل -->
                                 <i :class="downloadIcon"></i> Download CV
                             </button>
                         </div>
@@ -77,7 +81,7 @@
                 <h2 data-aos="fade-up" style="margin-top: 7rem;">Recent Projects</h2>
 
                 <div class="projects-grid">
-                    <!-- Always visible projects -->
+                    <!-- بطاقات المشاريع، تستخدم visibleProjects حتى نتحكم في Show More / Show Less -->
                     <div class="project-card" data-aos="fade-up" v-for="project in visibleProjects" :key="project.id">
                         <div class="project-image" @click="expandImage">
                             <img :src="project.image" :alt="project.title">
@@ -87,6 +91,7 @@
                             <p class="project-desc">{{ project.description }}</p>
                             <div class="project-meta">
                                 <div class="project-tech">
+                                    <!-- أيقونات التقنيات المستخدمة في المشروع -->
                                     <img v-for="tech in project.technologies" 
                                          :key="tech.name"
                                          :src="tech.icon" 
@@ -95,6 +100,7 @@
                                          class="tool-icon" 
                                          style="height: 24px;">
                                 </div>
+                                <!-- رابط المشروع إن وجد -->
                                 <a :href="project.link" class="project-link-icon" title="View Project" target="_blank" v-if="project.link !== '#'">
                                     <i class="fas fa-arrow-up-right-from-square"></i>
                                 </a>
@@ -103,7 +109,7 @@
                     </div>
                 </div>
 
-                <!-- Project Controls -->
+                <!-- Project Controls Show More / Show Less -->
                 <div class="project-controls">
                     <button v-if="!showAllProjects" @click="showMoreProjects" class="control-btn">
                         Show More
@@ -121,6 +127,7 @@
                 </div>
                 
                 <div class="awards-list">
+                    <!-- الجوائز والتكريم -->
                     <div class="award-item" data-aos="fade-up" v-for="award in awards" :key="award.id">
                         <div class="award-icon">
                             <i :class="award.icon"></i>
@@ -141,6 +148,7 @@
                 </div>
                 
                 <div class="tools-grid">
+                    <!-- أيقونات وأسماء الأدوات والتقنيات -->
                     <div class="tool-card" data-aos="fade-up" v-for="tool in tools" :key="tool.name">
                         <img :src="tool.icon" :alt="tool.name" class="tool-icon" />
                         <h4>{{ tool.name }}</h4>
@@ -156,7 +164,7 @@
                 </div>
             </footer>
 
-            <!-- Modal -->
+            <!-- Modal لعرض صورة المشروع بالحجم الكامل -->
             <div id="imageModal" class="modal" v-show="modalVisible" @click="closeModal">
                 <span class="close-modal" @click="closeModal">×</span>
                 <img :src="modalImageSrc" class="modal-content">
@@ -164,10 +172,10 @@
         </div>
     </div>
 
-    <!-- Font Awesome Kit -->
+    <!-- Font Awesome Kit (اختياري إذا كنت تحتاج مزيد من الأيقونات من الكيت) -->
     <script src="https://kit.fontawesome.com/86e812f22e.js" crossorigin="anonymous"></script>
     
-    <!-- Custom Script -->
+    <!-- Custom Script ملف Vue والمنطق الخاص بالموقع -->
     <script src="script.js"></script>
 </body>
 </html>
