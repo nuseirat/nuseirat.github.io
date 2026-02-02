@@ -23,7 +23,7 @@ createApp({
           id: 0,
           title: "Waseel",
           description: "Waseel is a Job Application Tracker web app",
-          image: "images/waseel.svg",
+          image: "images/waseel.png",
           link: "#",
           technologies: [
             {
@@ -279,3 +279,4 @@ createApp({
     document.removeEventListener('mousemove', this.handleMouseMove);
   }
 }).mount('#app');
+
