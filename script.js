@@ -24,15 +24,31 @@ createApp({
           title: "Waseel",
           description: "Waseel is a Job Application Tracker web app",
           image: "images/waseel.png",
-          link: "#",
+          link: "https://waseeltracker.vercel.app/",
           technologies: [
+            {
+              name: "React",
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+            },
+            {
+              name: "Vite",
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg"
+            },
             {
               name: "TypeScript",
               icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
             },
             {
+              name: "Tailwind CSS",
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
+            },
+            {
               name: "PostgreSQL",
               icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+            },
+            {
+              name: "XLSX",
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/filetype-excel/filetype-excel-original.svg"
             }
           ]
         },
@@ -44,8 +60,20 @@ createApp({
           link: "https://watadtracker.vercel.app/",
           technologies: [
             {
+              name: "React",
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
+            },
+            {
+              name: "Vite",
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg"
+            },
+            {
               name: "TypeScript",
               icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+            },
+            {
+              name: "Tailwind CSS",
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg"
             },
             {
               name: "PostgreSQL (PL/pgSQL)",
@@ -219,12 +247,15 @@ createApp({
     },
     downloadCV() {
       this.downloadIcon = 'fas fa-spinner fa-spin';
+
       setTimeout(() => {
         this.downloadIcon = 'fas fa-check';
+
         const link = document.createElement('a');
         link.href = 'Mohammed_AlnuseiratCV.pdf';
         link.download = 'Mohammed_AlnuseiratCV.pdf';
         link.click();
+
         setTimeout(() => {
           this.downloadIcon = 'fas fa-download';
         }, 1500);
@@ -257,20 +288,25 @@ createApp({
   },
 
   mounted() {
-    AOS.init({ duration: 1000, once: true });
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
 
     document.addEventListener('mousemove', this.handleMouseMove);
 
-    document.querySelectorAll('a, button, .project-image, .tool-card').forEach(el => {
-      el.addEventListener('mouseenter', this.handleMouseEnter);
-      el.addEventListener('mouseleave', this.handleMouseLeave);
+    document.querySelectorAll('a, button, .project-image, .tool-card').forEach(element => {
+      element.addEventListener('mouseenter', this.handleMouseEnter);
+      element.addEventListener('mouseleave', this.handleMouseLeave);
     });
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
       });
     });
   },
@@ -279,4 +315,3 @@ createApp({
     document.removeEventListener('mousemove', this.handleMouseMove);
   }
 }).mount('#app');
-
