@@ -1,5 +1,4 @@
 // استيراد createApp من Vue 3 من الـ CDN
-
 const { createApp } = Vue;
 
 createApp({
@@ -20,6 +19,23 @@ createApp({
 
       // ===== المشاريع =====
       projects: [
+        {
+          id: 0,
+          title: "Waseel",
+          description: "Waseel is a Job Application Tracker web app",
+          image: "images/waseel.svg",
+          link: "#",
+          technologies: [
+            {
+              name: "TypeScript",
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
+            },
+            {
+              name: "PostgreSQL",
+              icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
+            }
+          ]
+        },
         {
           id: 1,
           title: "Watad",
@@ -126,14 +142,16 @@ createApp({
           issuer: "University of Michigan",
           date: "Issued Jul 2023",
           link: "https://www.coursera.org/account/accomplishments/verify/FGNBVFY39KXB",
-logo: "https://brand.umich.edu/assets/brand/style-guide/logo-guidelines/U-M_Logo-Hex.png"        },
+          logo: "https://brand.umich.edu/assets/brand/style-guide/logo-guidelines/U-M_Logo-Hex.png"
+        },
         {
           id: 4,
           title: "Python Data Structures",
           issuer: "University of Michigan",
           date: "Issued Jul 2023",
           link: "https://www.coursera.org/account/accomplishments/verify/8GEZD37BMJAK",
-logo: "https://brand.umich.edu/assets/brand/style-guide/logo-guidelines/U-M_Logo-Hex.png"        }
+          logo: "https://brand.umich.edu/assets/brand/style-guide/logo-guidelines/U-M_Logo-Hex.png"
+        }
       ],
 
       // ===== الجوائز =====
@@ -172,115 +190,65 @@ logo: "https://brand.umich.edu/assets/brand/style-guide/logo-guidelines/U-M_Logo
 
       // ===== الأدوات والتقنيات =====
       tools: [
-        {
-          name: "FastAPI",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg"
-        },
-        {
-          name: "SpringBoot",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg"
-        },
-        {
-          name: "Java",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg"
-        },
-        {
-          name: "Vue.js",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg"
-        },
-        {
-          name: "Python",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg"
-        },
-        {
-          name: "JavaScript",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg"
-        },
-        {
-          name: "HTML5",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg"
-        },
-        {
-          name: "CSS3",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg"
-        },
-    
-        {
-          name: "TypeScript",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"
-        },
-        {
-          name: "PostgreSQL",
-          icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg"
-        }
+        { name: "FastAPI", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
+        { name: "SpringBoot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" },
+        { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+        { name: "Vue.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" },
+        { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+        { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+        { name: "HTML5", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+        { name: "CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" },
+        { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+        { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" }
       ]
     };
   },
 
   computed: {
-    // ترجع إما كل المشاريع أو أول 3 فقط حسب حالة showAllProjects
     visibleProjects() {
       return this.showAllProjects ? this.projects : this.projects.slice(0, 3);
     }
   },
 
   methods: {
-    // عرض كل المشاريع
     showMoreProjects() {
       this.showAllProjects = true;
     },
-
-    // إخفاء المشاريع الإضافية وإظهار أول 3 فقط
     showLessProjects() {
       this.showAllProjects = false;
     },
-
-    // منطق تحميل الـ CV مع تغيير الأيقونة لإحساس أفضل للمستخدم
     downloadCV() {
       this.downloadIcon = 'fas fa-spinner fa-spin';
-
       setTimeout(() => {
         this.downloadIcon = 'fas fa-check';
-
         const link = document.createElement('a');
         link.href = 'Mohammed_AlnuseiratCV.pdf';
         link.download = 'Mohammed_AlnuseiratCV.pdf';
         link.click();
-
         setTimeout(() => {
           this.downloadIcon = 'fas fa-download';
         }, 1500);
       }, 1000);
     },
-
-    // فتح المودال مع صورة المشروع المكبرة
     expandImage(event) {
       const img = event.currentTarget.querySelector('img');
       this.modalImageSrc = img.src;
       this.modalVisible = true;
     },
-
-    // إغلاق المودال
     closeModal() {
       this.modalVisible = false;
     },
-
-    // تحريك المؤشر المخصص مع حركة الماوس
     handleMouseMove(e) {
       if (this.$refs.cursor) {
         this.$refs.cursor.style.left = e.clientX + 'px';
         this.$refs.cursor.style.top = e.clientY + 'px';
       }
     },
-
-    // تكبير المؤشر عند دخول العناصر التفاعلية
     handleMouseEnter() {
       if (this.$refs.cursor) {
         this.$refs.cursor.style.transform = 'scale(1.5)';
       }
     },
-
-    // إعادة المؤشر لحجمه الطبيعي عند الخروج
     handleMouseLeave() {
       if (this.$refs.cursor) {
         this.$refs.cursor.style.transform = 'scale(1)';
@@ -289,37 +257,25 @@ logo: "https://brand.umich.edu/assets/brand/style-guide/logo-guidelines/U-M_Logo
   },
 
   mounted() {
-    // تهيئة مكتبة AOS للحركات
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
+    AOS.init({ duration: 1000, once: true });
 
-    // ربط أحداث الماوس للمؤشر المخصص
     document.addEventListener('mousemove', this.handleMouseMove);
 
-    // إضافة تأثير hover على العناصر التفاعلية
-    document.querySelectorAll('a, button, .project-image, .tool-card').forEach(element => {
-      element.addEventListener('mouseenter', this.handleMouseEnter);
-      element.addEventListener('mouseleave', this.handleMouseLeave);
+    document.querySelectorAll('a, button, .project-image, .tool-card').forEach(el => {
+      el.addEventListener('mouseenter', this.handleMouseEnter);
+      el.addEventListener('mouseleave', this.handleMouseLeave);
     });
 
-    // سكرول سلس للروابط الداخلية إن وجدت
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
-
         const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
       });
     });
   },
 
   beforeUnmount() {
-    // تنظيف لستينر الماوس عند إزالة التطبيق
     document.removeEventListener('mousemove', this.handleMouseMove);
   }
 }).mount('#app');
-
